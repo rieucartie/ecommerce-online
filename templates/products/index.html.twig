@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}tous les produits !{% endblock %}
+
+{% block stylesheets %}
+
+    <style>
+        .modal-backdrop {
+            position: fixed;
+            z-index: 0 !important ;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #000;
+        }
+    </style>
+
+{% endblock %}
+
+{% block body %}
+
+    {{ render(controller('App\\Controller\\NewsletterController::newsletter' )) }}
+
+<div class="container">
+
+        <div class="row">
+
+           <div class="col-md-3">
+
+                {% include 'products/_filter.html.twig' with {form:form,min :min ,max : max} only %}
+
+            </div>
+
+                <div class="col-md-9">
+
+                   <div class="d-flex justify-content-end mb-2 " >
+
+                       <div class="dropdown">
+
+                           <h3 data-toggle="dropdown"><span class="badge badge-secondary">Triez vos produits</span></h3>
+
+                           <div class="dropdown-menu">
+
+                               <a class="dropdown-item">  {{  knp_pagination_sortable(products,'Valeur la - chere', 'p.price', {}, {'direction': 'asc'}) }}</a>
+
+                               <a class="dropdown-item">  {{  knp_pagination_sortable(products,'Valeur la + chere', 'p.price', {}, {'direction': 'desc'}) }}</a>
+
+                               <a class="dropdown-item">  {{  knp_pagination_sortable(products,'Tri A -> Z', 'p.name', {}, {'direction': 'asc'}) }}</a>
+
+                               <a class="dropdown-item">  {{  knp_pagination_sortable(products,'Tri Z -> A', 'p.name', {}, {'direction': 'desc'}) }}</a>
+
+                               <a class="dropdown-item">  {{   knp_pagination_sortable(products,'Promo', 'p.promo')  }}</a>
+                           </div>
+                       </div>
+              </div>
+                    <div class="grid">
+                        {% for product in products %}
+
+                            {% include 'products/_card.html.twig' with {product:product}  %}
+
+                        {%  endfor  %}
+
+                    </div>
+                    <div class="plusbas">
+                       {{ knp_pagination_render(products) }}
+                    </div>
+            </div>
+        </div>
+</div>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.0/umd/popper.min.js"></script>
+
+    <script src="js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+        $(function(){
+            $("#newsletterModal").modal('show');
+        });
+    </script>
+    <script>
+        $('h3').mouseover(function() {
+            $(this).dropdown('toggle')
+        })
+    </script>
+{% endblock %}

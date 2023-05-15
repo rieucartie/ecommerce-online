@@ -1,0 +1,88 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %} Réponse aux questions {% endblock %}
+
+{% block body %}
+
+    <div class="container ">
+
+        <div class="row">
+
+            <div style="margin-left: 200px">
+
+                <div class="dropdown">
+
+                    <h3 data-toggle="dropdown"><span class="badge badge-secondary">Triez vos réponses</span></h3>
+
+                    <div class="dropdown-menu">
+
+                        <a class="dropdown-item">  {{ knp_pagination_sortable(answers,'question la - recente', 'a.created', {}, {'direction': 'asc'}) }}
+                        </a>
+
+                        <a class="dropdown-item">  {{ knp_pagination_sortable(answers,'question la + recente', 'a.created', {}, {'direction': 'desc'}) }}
+                        </a>
+
+                        <a class="dropdown-item">
+                            <a href="{{ path('answer', {reponsevide: 'vide'}) }}">
+                                En attente de réponse
+                            </a>
+
+                            <a class="dropdown-item">
+                                {{ knp_pagination_filter( answers, {'a.body': 'body'} ) }}
+                            </a>
+
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="sortable-answer">
+            <table class="" id="datatable">
+                <thead>
+                <tr>
+                    <th>Question</th>
+                    <th>crée le</th>
+                    <th>Réponse</th>
+                    <th>Modifier</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {% for response in answers %}
+                    <tr>
+
+                        <td>{{ response.question.body }}</td>
+
+                        <td>{{ response.created|date('d-m-Y') }}</td>
+
+                        <td>{{ response.body }}</td>
+
+                        <td>
+                            <a href="{{ path('answer_edit', {'id': response.id}) }}" class="btn btn-success">Modifier</a>
+                        </td>
+                    </tr>
+                {% else %}
+
+                    <tr>
+                        <td colspan="3">Pas d'enregistrement trouvé </td>
+                    </tr>
+
+                {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+
+        <div class="d-flex justify-content-center mt-3 ">
+
+            {{ knp_pagination_render(answers) }}
+
+        </div>
+    </div>
+
+    <script>
+        $('h3').mouseover(function() {
+            $(this).dropdown('toggle')
+        })
+    </script>
+{% endblock %}

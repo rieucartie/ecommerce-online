@@ -1,0 +1,49 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% set breadcrumbItems = [{ route: "commande", label: "commande"}] %}
+
+{% block body %}
+    <div class="container">
+
+        <div class="plusbas2">
+            <h1 class="mb-0">Historique des factures</h1>
+        </div>
+
+        {% for order in orders %}
+            <div style="margin-left: 10px" class="row">
+                <table class="tables">
+                    <thead>
+
+                    <tr>
+                        <th class="text-center">Date de commande</th>
+                        <th class="text-center">Nom</th>
+                        <th class="text-center">Imprimer</th>
+                    </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                    <tr>
+
+                        <td>
+                            {{ order.datecommande|date('d-m-Y') }}
+                        </td>
+
+                        <td>
+                            {{ order.user.username }}
+                        </td>
+
+                        <td>
+                            <a href="{{ path('Admin_facturation_pdf_commande', { 'id': order.id ,'idadresse': order.user.id }) }}"
+                               class="btn btn-primary">imprimer la facture</a>
+                        </td>
+
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Modifier la Tva {% endblock %}
+
+{% block body %}
+
+<div class="container2">
+
+    <h2>Modifier la Tva</h2>
+
+    <hr>
+
+    {{ include('admin/tva/_form.html.twig', {'button_label': 'Modifier'}) }}
+
+    <div id="Global">
+
+        <div id="gauche">
+            <a class="btn btn-info" href="{{ path('tva_index') }}">Retour à la liste</a>
+        </div>
+
+        <div id="droid">
+
+            {{ include('admin/tva/_delete_form.html.twig') }}
+
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

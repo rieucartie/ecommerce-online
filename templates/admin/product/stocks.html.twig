@@ -1,0 +1,65 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}modifier le stock d'un produit {% endblock %}
+
+{% block body %}
+
+    <div class="container2">
+
+        <h2>Liste des produits </h2>
+
+        <h2>Tapez entrée aprés la saisie du chiffre pour valider le choix </h2>
+
+        <hr>
+
+        {% if(pagination.data|length >0) %}
+
+            <table class="tableauStock" id="datatableProduct">
+                <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Stock</th>
+                </tr>
+                </thead>
+
+                <tbody>
+
+                {% for product in pagination.data %}
+
+                    <tr>
+                        <td>{{ product.name }}</td>
+
+                        <td>
+                            <form action="{{ path('Updatequantite',{ 'id': product.id } ) }}" method="post">
+
+                                <input type="text" class="" name="qte" value="{{ product.stock }}">
+
+                            </form>
+                        </td>
+
+                    </tr>
+                {% else %}
+
+                    <tr>
+                        <td colspan="8">Pas d'enregistrement trouvé</td>
+                    </tr>
+
+                {% endfor %}
+
+                </tbody>
+
+            </table>
+
+            {{ pagination.display() }}
+
+        {% else %}
+
+            <div class="plusbas2">
+
+                Pas d'enregistrement trouvé
+
+            </div>
+        {% endif %}
+
+    </div>
+{% endblock %}

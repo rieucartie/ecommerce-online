@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block render %}
+
+    {% block javascripts %}
+
+       <script>
+            alert("Merci de votre achat ,Votre achat a bien été pris en compte,vous pouvez le consulter dans l'historique des commandes");
+
+            window.location.href='{{path('products') }}';
+
+        </script>
+
+    {% endblock %}
+{% endblock %}
+

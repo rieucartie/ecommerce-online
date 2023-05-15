@@ -1,0 +1,37 @@
+
+###> symfony/framework-bundle ###
+/.idea
+/.env.local
+/.env.local.php
+/.env.*.local
+/public/bundles/
+/config/secrets/prod/prod.decrypt.private.php
+/var/
+/vendor/
+/integrationContinu/
+/nbproject/
+
+###< symfony/framework-bundle ###
+
+###> symfony/phpunit-bridge ###
+.phpunit
+.phpunit.result.cache
+/phpunit.xml
+###< symfony/phpunit-bridge ###
+
+###> symfony/webpack-encore-bundle ###
+/node_modules/
+/public/build/
+npm-debug.log
+yarn-error.log
+/public/uploads/
+###< symfony/webpack-encore-bundle ###
+/nbproject/private/
+###> liip/imagine-bundle ###
+/public/media/cache/
+###< liip/imagine-bundle ###
+
+###> phpunit/phpunit ###
+/phpunit.xml
+.phpunit.result.cache
+###< phpunit/phpunit ###

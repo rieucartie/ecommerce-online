@@ -1,0 +1,155 @@
+{% extends 'base.html.twig' %}
+
+{% set breadcrumbItems = [
+    { route: "order_history",  label: "historique"}
+] %}
+
+{% block body %}
+
+    <div class="row">
+
+        <div class="col-12">
+
+            <div class="card">
+
+                <div class="card-header">
+
+                    <h1 class="mb-0">Historique de commandes</h1>
+
+                </div>
+
+                <div class="card-choice">
+
+                    {% if orders is defined %}
+
+                        <form action="{{ path('order_history') }}" method="post">
+
+                            <select class="select-style" name="suividecommande" onChange="this.form.submit()">
+
+                                <option value="">--Choisissez une commande--</option>
+
+                                {% if resultats is defined  and resultats |length > 0 %}
+
+                                    {% for resultat in resultats %}
+
+                                        <option value="{{ resultat.id }} "
+                                                {% if envoieDuStatut  ==  resultat.id %}
+                                                    selected='selected'
+                                                {% endif %}
+                                        >
+                                            commande
+                                            du {{ resultat.datecommande|format_datetime(locale='fr',pattern="EEEE dd MMMM YYYY") }}
+                                        </option>
+
+                                    {% endfor %}
+
+                                {% endif %}
+
+                            </select>
+
+                        </form>
+
+                    {% else %}
+
+                        Pas de commande  pour l'instant
+
+                    {% endif %}
+
+                    {% if envoieDuStatut is defined %}
+
+                        {% if envoieDuStatut | length == 0 %}
+
+                        {% else %}
+
+                            {% if orders is defined %}
+
+                                {% set datedecommande = "" %}
+
+                                {% set nom = "" %}
+
+                                {% for order in orders %}
+
+                                    {% set datedecommande =  order.datecommande %}
+
+                                    {% set nom =order.user.username %}
+
+                                    <div class="entoureCommande">
+
+                                        <div class="row">
+
+                                            <div class="col">
+
+                                                <div class="row">Vendu et expedié par : <span
+                                                            class="gras-simple"> mr X </span></div>
+                                                <div class="row">Payé par {{ nom }} </div>
+                                            </div>
+
+                                            <div class="col2">
+
+                                                <a href="{{ path('facturation_pdf_commande', { 'id': order.id }) }}"
+                                                   class="btn btn-primary">Imprimer la facture</a>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                                <div class="row">
+
+                                    <div class="test"><span class="gras">Livraison à domicile :</span> ma rue préféré </div>
+
+                                </div>
+
+                                <div class="entoureCommande2">
+
+                                    {% for order in orders %}
+
+                                    {% for orderline in order.lines %}
+
+                                    <div class="row">
+
+                                        <div class="card mb-3 ml-4" style="max-width: 440px;">
+
+                                            <div class="row g-0">
+
+                                                <div class="col-md-4">
+
+                                                    <img class="img-fluid"
+                                                         src="{{ asset('uploads/'~ orderline.product.fileName) }}"
+                                                         width="200" height="205" alt="">
+                                                    {# <img src="{{ vich_uploader_asset(product,'imageFile') }}"
+                                                     alt="{{ orderline.product.fileName }}" class="cardimg-top">
+                                                    #}
+                                                </div>
+
+                                                <div class="col-md-8">
+                                                    <div class="card-body">
+
+                                                        <h5 class="card-title">{{ orderline.product.name }}</h5>
+
+                                                        <p class="card-text">{{ orderline.product.description }}</p>
+
+                                                        <p class="card-text"><small class="text-muted">quantité
+                                                                : {{ orderline.quantity }}</small></p>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {% endfor %}
+
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            {% else %}
+                                Pas de commande  pour l'instant
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

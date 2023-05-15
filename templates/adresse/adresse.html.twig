@@ -1,0 +1,100 @@
+{% extends 'base.html.twig' %}
+
+    {% set adressBread  =  "" %}
+
+    {% set breadcrumbItems = [
+        { route: "nouvelleadresses", routeParams: { id: adressBread }, label: "Fiche adresse"}
+    ] %}
+
+{% block title %}Adresse{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="span12">
+
+                <h2>Livraison</h2>
+
+                {% if adresse is  empty %}
+
+                    <div class="adresseGauche2">
+
+                        <h4>Ajouter une nouvelle adresse</h4>
+
+                        <form action="{{ path('nouvelleadresses') }}" method="POST">
+
+                            {% include 'adresse/new.html.twig' with {'address': 'address','form':form} %}
+
+                        </form>
+
+                    </div>
+
+                {% else %}
+
+                    <div class="adresseDroite">
+
+                        {% if adresse|length != 0 %}
+
+                            <form action="{{ path('validateadresses') }}" method="POST">
+
+                                <h4>Adresse de livraison</h4>
+
+                                {% for adress in adresse %}
+                                    {% set adressBread  = adress.id %}
+                                    <label class="radio">
+                                        <input type="radio" id="livraison" name="livraison" value="{{ adress.id }}"
+                                               {% if loop.index0 == 0 %}checked="checked"{% endif %}>
+                                        {{ adress.telephone }} {{ adress.ville }} - {{ adress.pays }}
+                                        <a href="{{ path('adresse', { 'id' : adress.id }) }}">
+                                            <i class="icon-trash"></i>
+                                        </a>
+                                        <br/>{{ adress.prenom }} {{ adress.nom }}
+                                    </label>
+                                {% endfor %}
+                                <br><br>
+
+                                <h4>Adresse de facturation</h4>
+
+                                {% for adress in adresse %}
+                                    <label class="radio">
+                                        <input type="radio" id="facturation" name="facturation" value="{{ adress.id }}"
+                                               {% if loop.index0 == 0 %}checked="checked"{% endif %}>
+                                        {{ adress.adresse }}, {{ adress.cp }} {{ adress.ville }} - {{ adress.pays }}
+                                        <a href="{{ path('adresse', { 'id' : adress.id }) }}">
+                                            <i class="icon-trash"></i></a>
+                                        <br/>{{ adress.prenom }} {{ adress.nom }}
+                                    </label>
+                                    <input type="hidden" name="adressHide" value="{{ adress.id }}"/>
+                                {% endfor %}
+
+                                <br>
+
+                                <input class="btn btn-success" type="submit" id="validate" value="Valider ma commande">
+
+                            </form>
+
+                        {% endif %}
+                    </div>
+
+                    <div class="adresseGauche">
+
+                        <h4>Ajouter une nouvelle adresse</h4>
+
+                        <form action="{{ path('nouvelleadresses') }}" method="POST">
+
+                            {% include 'adresse/new.html.twig' with {'address': 'address','form':form} %}
+
+                        </form>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock %}
+
+
+

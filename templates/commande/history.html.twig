@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="mb-0">Historique de commandes</h1>
+                </div>
+                <table class="mb-0 table table-striped">
+                    <thead>
+                    <tr>
+                        <th class="text-center">Date de commande</th>
+                        <th class="text-center"> Produit</th>
+                        <th class="text-center">Statut</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for order in orders %}
+                        <tr>
+                        {% for orderline in order.lines %}
+                            <td class="text-center" rowspan="2">{{ order.datecommande|date("d/m/Y") }}</td>
+                            <tr>
+                                <td class="text-center">{{ orderline.product.name }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

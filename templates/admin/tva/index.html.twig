@@ -1,0 +1,72 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Tva{% endblock %}
+
+{% block body %}
+
+    <div class="container2">
+
+        <h2>Liste des tva </h2>
+
+        <hr>
+
+        {% if(pagination.data|length >0) %}
+
+            <div class="plusbas">
+
+                <a class="btn btn-warning" href="{{ path('tva_new') }}">Créer une nouvelle tva</a>
+
+            </div>
+
+            <table class="table table-striped table-bordered" id="datatableTva">
+
+                <thead>
+
+                <tr>
+                    <th>Nom <i class="fas fa-angle-up"></i> <i class="fas fa-angle-down"></i></th>
+
+                    <th>Valeur <i class="fas fa-angle-up"></i> <i class="fas fa-angle-down"></i></th>
+
+                    <th>Modifier</th>
+                </tr>
+                </thead>
+
+                <tbody>
+
+                {% for tva  in pagination.data %}
+
+                    <tr>
+
+                        <td>{{ tva.nom }}</td>
+
+                        <td>{{ tva.valeur }}</td>
+
+                        <td>
+
+                            <a class="btn btn-primary" href="{{ path('tva_edit', {'id': tva.id}) }}">Modifier</a>
+
+                        </td>
+
+                    </tr>
+
+                {% endfor %}
+
+                </tbody>
+
+            </table>
+
+            {{ pagination.display() }}
+
+        {% else %}
+
+            <div class="plusbas2">
+
+                Pas d'enregistrement trouvé
+
+            </div>
+
+        {% endif %}
+    </div>
+
+{% endblock %}
+

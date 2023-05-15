@@ -1,0 +1,97 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Produit {% endblock %}
+
+{% block body %}
+
+    <div class="container2">
+
+        <h2>Liste des produits </h2>
+        <hr>
+
+        {% if(pagination.data|length >0) %}
+
+            <div class="plusbas">
+
+                <a class="btn btn-warning" href="{{ path('product_new') }}">Creer un nouveau produit</a>
+
+            </div>
+
+            <table class="tableau" id="datatableProduct">
+                <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Prix</th>
+                    <th>Description</th>
+                    <th>Contenu</th>
+                    <th>Image</th>
+                    <th>Promo</th>
+                    <th>Tva</th>
+                    <th>Stock</th>
+                    <th>Catégorie</th>
+                    <th>Modifier</th>
+                    <th>Supprimer</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {% for product in pagination.data %}
+
+                    <tr>
+                        <td>{{ product.name }}</td>
+
+                        <td>{{ product.price|round(2, 'floor') }}</td>
+
+                        <td>{{ product.description }}</td>
+
+                        <td>{{ product.content }}</td>
+
+                        <td>{{ product.fileName }}</td>
+
+                        <td>{{ product.promo ? 'Oui' : 'Non' }}</td>
+
+                        <td>{{ product.tva }}</td>
+
+                        <td>{{ product.stock }}</td>
+
+                        <td>
+                            {% for prod in product.categories %}
+
+                                {{ prod.name }}
+
+                            {% endfor %}
+                        </td>
+
+                        <td>
+                            <a class="btn btn-primary"
+                               href="{{ path('product_edit', {'id': product.id}) }}">Modifier</a>
+                        </td>
+
+                        <td>
+                            {{ include('admin/product/_delete_form.html.twig') }}
+                        </td>
+
+                    </tr>
+                {% else %}
+
+                    <tr>
+                        <td colspan="8">Pas d'enregistrement trouvé</td>
+                    </tr>
+
+                {% endfor %}
+
+                </tbody>
+
+            </table>
+
+            {{ pagination.display() }}
+
+        {% else %}
+
+            <div class="plusbas2">
+                Pas d'enregistrement trouvé
+            </div>
+
+        {% endif %}
+    </div>
+{% endblock %}

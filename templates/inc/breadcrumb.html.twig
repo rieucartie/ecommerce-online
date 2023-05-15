@@ -1,0 +1,28 @@
+{% set breadcrumbItems = breadcrumbItems is not defined ? [] : breadcrumbItems %}
+
+<nav aria-label="breadcrumbs">
+
+    <ol class="breadcrumbs">
+
+        <li class="breadcrumb-item" aria-current="page">
+
+            <a href="{{ path("products") }}">Accueil ></a>
+
+            {% for item in breadcrumbItems %}
+
+                {% if item.route is defined %}
+
+                    <a href="{{ path(item.route, item.routeParams|default({})) }}">{{ item.label }}</a>
+
+                {% else %}
+
+                    {{ item.label }}
+
+                {% endif %}
+
+            {% endfor %}
+
+        </li>
+    </ol>
+</nav>
+

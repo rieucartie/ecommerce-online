@@ -1,0 +1,19 @@
+.breadcrumb {
+  margin-top: 4rem;
+  margin-left: 150px;
+  background-color: #4e88c1;
+}
+.breadcrumbs {
+  margin-left: 100px;
+  text-decoration: underline  #313131;
+}
+.breadcrumb > .breadcrumb-item {
+  color: #fff;
+}
+.breadcrumb > .breadcrumb-item:first-child > a {
+  font-weight: 500;
+}
+.breadcrumb > .breadcrumb-item > a {
+  color: #fff;
+  text-decoration: none;
+}

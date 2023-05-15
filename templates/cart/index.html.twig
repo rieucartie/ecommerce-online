@@ -1,0 +1,108 @@
+{% extends 'base.html.twig' %}
+
+{% set breadcrumbItems = [
+    { route: "cartindex",  label: "panier"}
+] %}
+
+{% block title %} panier {% endblock %}
+
+{% block body %}
+
+    <div class="container">
+
+        <div class="bg-light p-3">
+            <h1>Votre panier</h1>
+        </div>
+
+        <div class="row mb-2">
+
+            <div class="monopanier">
+
+                {% if items|length >0 %}
+
+                    <table class="table table-striped">
+
+                        <thead class="thead-dark">
+                        <tr>
+                            <th>Nom du produit</th>
+
+                            <th>Prix TTC</th>
+
+                            <th>Quantité</th>
+
+                            <th>Total TTC</th>
+
+                            <th>Suppression</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <tr>
+                            {% for item in items %}
+
+                            <td>{{ item.products.name }}</td>
+
+                            {% set sumAddTvaToProduct = 0 %}
+
+                            {% set sumAddTvaToProduct = item.products.price + (item.products.price * item.products.tva.valeur) /100 %}
+
+                            <td>{{ sumAddTvaToProduct|round(2, 'floor') }} €</td>
+
+                            <td>
+                                <form action="{{ path('quantite',{ 'id': item.products.id } ) }}" method="post">
+
+                                    <select name="qte" style="width:80px;" class="custom-select"
+                                            onChange="this.form.submit()">
+                                        {% for i in 1..item.products.stock %}
+                                            <option value="{{ i }}" {% if i == item.quantity %} selected="selected" {% endif %}>
+                                                {{ i }}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+
+                                </form>
+                            </td>
+
+                            <td>{{ sumAddTvaToProduct|round(2, 'floor')  * item.quantity }} €</td>
+
+                            <td style="text-align:center;">
+
+                                <a href="{{ path('cartremove',{'id':item.products.id}) }}"
+                                   class="btn btn-danger btn-sm">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+
+                            </td>
+                        </tr>
+
+                        {% endfor %}
+
+                        </tbody>
+                        <tfoot>
+
+                        <tr>
+                            <td colspan="4" class="text-right">Total TTC:
+                            <td><span class="total">{{ total|round(2, 'floor') }} €</span></td>
+                        </tr>
+
+                        </tfoot>
+
+                    </table>
+
+                    <form action="{{ path('adresse') }}" method="POST">
+
+                        <input name="adressHidden" type="hidden" value="{{ user }}"/>
+
+                        <button type="submit" class="btn btn-success pull-right"> Valider mon panier</button>
+
+                    </form>
+
+                {% else %}
+
+                    <p>Surprise, c'est vide !</p>
+
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

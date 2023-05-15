@@ -1,0 +1,420 @@
+@import "~bootstrap/scss/bootstrap";
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import '~@fortawesome/fontawesome-free/scss/regular';
+@import '~@fortawesome/fontawesome-free/scss/solid';
+@import "component/breadcrumb";
+@import "component/table";
+@import "component/accordion";
+@import "component/dropdown";
+@import "component/sidebar";
+@import "component/navbar";
+@import "component/selectCombo";
+@import "component/contact";
+@import "component/span";
+@import "component/image";
+
+.myclass{
+  padding: 0px 50px 0px 0px; /* 3 valeurs */
+  color: #0A7B0E;
+}
+.col-me {
+  margin-top: 20px;
+  flex: 1;
+}
+.qte{
+  margin-right: 15px;
+  margin-top: 15px;
+}
+body {
+  /*background-color: lightgray; */
+}
+.total{
+  border-bottom: 2px solid #0d0000;
+  color: #0d0000;
+  font-weight: bold;
+  font-size: 22px;
+  font-family: roboto;
+}
+
+
+/* margin all   *//* margin all   *//* margin all   */
+.droite{
+  float: right
+}
+.ecartGauche {
+  float: left;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin-bottom: 15px;
+  margin-right: 15px;
+}
+.ecartDroite {
+  float: right;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin-bottom: 15px;
+  margin-left: 15px;
+}
+.adresseDroite {
+  width: 380px;
+  float:left;
+}
+.adresseGauche {
+  margin-right: 25px;
+  width: 520px;
+  float:right;
+}
+
+/* fin margin all   *//* fin margin all   *//* fin margin all   */
+
+/*  col  *//*  col  *//*  col  *//*  col  */
+.col {
+  flex: 1;
+  padding: 1em;
+  margin-bottom: 20px;
+  margin-left: 50px;
+}
+.col2 {
+  flex: 1;
+  padding: 4em;
+  display: inline-block;
+  margin-bottom: 20px;
+  margin-left: 550px;
+  text-align: center;
+  line-height: 2em;
+  white-space: nowrap;
+}
+.col3 {
+  padding: 2em;
+  display: inline-block;
+  margin-bottom: 20px;
+  margin-left: 400px;
+  text-align: center;
+  line-height: 1em;
+  white-space: nowrap;
+}
+.col4 {
+  padding: 2em;
+  display: inline-block;
+  margin-bottom: 20px;
+  margin-left: 400px;
+  text-align: center;
+  line-height: 1em;
+  white-space: nowrap;
+}
+/* fin col  *//* fin col  *//* fin col  */
+.CardCategoriePos {
+  margin-bottom: 40px;
+}
+
+.accordion {
+  margin-bottom: 20px;
+}
+.offset2{margin-left:180px;}
+
+.plusbas{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+/* dl *//* dl *//* dl */
+
+dl {
+  margin-bottom: 20px;
+}
+dt,
+dd {
+  /*line-height: 20px;*/
+}
+dt {
+  font-weight: bold;
+}
+dd {
+  margin-left: 10px;
+}
+.dl-horizontal {
+  *zoom: 1;
+}
+.dl-horizontal:before,
+.dl-horizontal:after {
+  display: table;
+  line-height: 0;
+  content: "";
+}
+.dl-horizontal:after {
+  clear: both;
+}
+.dl-horizontal dt {
+  float: left;
+  width: 160px;
+  overflow: hidden;
+  clear: left;
+  text-align: right;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.dl-horizontal dd {
+  margin-left: 180px;
+}
+/* fin dl *//* fin dl *//* fin dl */
+
+input.span9,
+textarea.span9,
+.uneditable-input.span9 {
+  width: 686px;
+}
+.table td.span9,
+.table th.span9 {
+  float: none;
+  width: 684px;
+  margin-left: 0;
+}
+
+.row-fluid .span9 {
+  width: 74.46808510638297%;
+  *width: 74.41489361702126%;
+}
+.card-choice{
+  margin-left: 100px;  margin-top: 20px;margin-bottom: 20px;
+  display:inline;
+}
+.select-commande{
+  margin-left: 100px;
+  display:inline;
+}
+.row {
+  display: flex;
+}
+
+.com {
+  font-family: Arial;
+  font-size: 20px;
+  font-weight: bold;
+}
+.gras-simple{
+  font-weight: bold;
+}
+.gras{
+  font-weight: bold;
+  font-family: "Bell MT";
+  font-size: 26px;
+}
+.entoureCommande{
+  border: #fff9f9 solid 2px;
+  height: 180px;
+  background-color: #f7f7f7;
+  margin-left: 55px;
+  margin-right: 55px;
+}
+.entoureCommande2{
+  border: #fff9f9 solid 2px;
+  margin-left: 55px;
+  margin-right: 55px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.test {
+  border: #fff9f9 solid 2px;
+  margin-left: 80px;
+  margin-right: 55px;
+  margin-top: 10px;
+}
+.row1{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  align-content: stretch;
+  width: 750px;
+  height: 250px;
+}
+.monopanier{
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.table .thead-dark th {
+  color: #fff;
+  background-color: #343a40;
+  border-color: #454d55;
+  align-content: center;
+  text-align: center;
+  font-family: initial;
+  font-size: 20px;
+}
+.text-right {
+  text-align: right !important;
+  color: #000000;
+  font-weight: bold;
+  font-size: 20px;
+}
+.container {
+  /* max-width: 840px;*/
+  margin-bottom: 50px;
+}
+p span {
+  font-family: Georgia,"Times New Roman",serif;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 52px;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: block;
+}
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Paaji+2:wght@400;600&display=swap');
+li
+{
+  list-style-type: none;
+}
+.click_collapse .sidebar{
+  transition: all 0.2s ease;
+}
+.main_container {
+  margin-left: 70px;
+  width: calc(100% - 70px);
+}
+.main_container .content{
+  background: #fff;
+  text-align: justify;
+}
+.click_collapse .main_container{
+  width: calc(100% - 250px);
+  margin-left: 250px;
+  transition: all 0.2s ease;
+}
+.centrer{
+  margin-right: 150px;
+}
+.tableCommande{
+  width: 750px;
+}
+.container1 {
+  max-width: 840px;
+  margin-bottom: 50px;
+  margin-left: 250px;
+}
+.container2 {
+  max-width: 840px;
+  margin-bottom: 50px;
+  margin-left: 270px;
+}
+.Retour {
+  display: inline-block;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+.plusbas{
+  margin-top: 10px;
+}
+#Global #gauche {
+  float:left;
+  width:20%;
+}
+#Global #droid {
+  margin-top: 20px;
+}
+.plusbas2 {
+  margin-top: 10px;
+  margin-left: 150px;
+  margin-bottom: 15px;
+}
+
+label {
+  position: relative;
+  padding: 0 0 0 2rem;
+}
+/* input *//* input *//* input *//* input */
+
+input[type=checkbox] {
+  position: absolute;
+  opacity: 0;
+}
+
+input[type=checkbox] + label::before,
+input[type=checkbox] + label::after {
+  content: '';
+  position: absolute;
+  display: inline-block;
+}
+
+input[type=checkbox] + label::before {
+  left: 0.5rem;
+  top: 0.15rem;
+  width: 0.9rem;
+  height: 0.9rem;
+  border: 0.05rem solid black;
+  background: white;
+}
+
+input[type=checkbox]:checked + label::after {
+  left: 0.6rem;
+  top: 0.28rem;
+  height: 0.8rem;
+  border-left: 0.8rem solid black;
+}
+
+input[type=checkbox]:focus + label::before {
+  outline: 0.05rem dotted;
+}
+/*  fin input  *//*  fin input  *//*  fin input  */
+
+.displaylacommande{
+  margin-top: 20px;
+  margin-left: 155px;
+}
+label{
+  padding: 0 0 0 30px;
+}
+.label_input{
+  padding: 0 0 0 2rem;
+}
+.Global{
+  margin-top: 20px;
+  margin-left: 245px;
+  margin-bottom: 30px;
+}
+.container3{
+  max-width: 840px;
+  margin-left: 250px;
+}
+
+.cardimg-top{
+  width: 200px;
+  height: 200px;
+}
+
+/* question */
+
+.sortable-answer{
+  margin-left: 90px;
+  margin-top: 20px;
+}
+
+
+/* Hide the items when the select box is closed: */
+.select-hide {
+  display: none;
+}
+
+.select-items div:hover, .same-as-selected {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.tableauStock {
+  border: 1px solid grey;
+  border-collapse: collapse;
+  table-layout: fixed;
+  display: inline-block;
+  overflow-y: auto;
+  height: 650px;
+  padding: 12px;
+  font-size:22px;
+}
+
+
+
+

@@ -1,0 +1,67 @@
+<nav class="navbar navbar-expand-lg navbar ">
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" class="droite" id="navbarNav">
+
+        {% if is_granted('ROLE_ADMIN') %}
+
+        {% elseif is_granted('ROLE_USER') %}
+
+            <ul class="navbar-nav">
+                <a href="{{ path('securitylogin') }}" style="color: bisque;" class="navbar-brand mb-0 h1">Commerce</a>
+
+                <li class="nav-item">
+                    <a href="{{ path('order_history') }}" class="nav-link">Historique des commandes</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ path('products') }}" class="nav-link">Produits</a>
+                </li>
+
+            </ul>
+            <ul class="nav navbar-nav ml-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('securitylogout') }}" tabindex="-1" aria-disabled="true">Déconnexion</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('cartindex') }}" tabindex="-1" aria-disabled="true">Panier</a>
+                </li>
+
+            </ul>
+
+        {% elseif not app.user %}
+
+            <ul class="navbar-nav">
+                <a href="{{ path('securitylogin') }}" class="navbar-brand mb-0 h1">Commerce</a>
+
+                <li class="nav-item">
+                    <a href="{{ path('products') }}" class="nav-link">Produits</a>
+                </li>
+            </ul>
+
+            <ul class="nav navbar-nav ml-auto">
+                <a class="nav-link" href="{{ path('cartindex') }}" tabindex="-1" aria-disabled="true">Panier</a>
+
+                <li class="nav-item">
+                    <a href="{{ path('securitylogin') }}" class="nav-link">Connexion</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ path('securityregistration') }}" class="nav-link">Inscription</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ path('contact') }}" class="nav-link">Contact</a>
+                </li>
+
+            </ul>
+
+        {% endif %}
+    </div>
+</nav>

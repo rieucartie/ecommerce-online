@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+
+    <title>{% block title %}Welcome!{% endblock %}</title>
+
+    {{ encore_entry_link_tags('app') }}
+
+</head>{{ encore_entry_script_tags('app') |replace({'src=': 'defer src='}) |raw }}
+
+<body>
+
+<script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+
+<div class="wrapper hover_collapse">
+
+    <div class="top_navbar">
+
+        <div class="menu">
+
+            <div class="hamburger">
+
+                Administration :
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="sidebar">
+
+    <div class="sidebar_inner">
+
+        <ul>
+            <li>
+                <a href="{{ path('admin_utilisateurs') }} ">
+                    <span class="icon"><i class="fas fa-user"></i></span>
+                    <span class="text">Utilisateur </span>
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ path('admin_admin_Commande') }}">
+                    <span class="icon"><i class="fas fa-truck"></i></span>
+                    <span class="text">Commande</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ path('category_index') }}">
+                    <span class="icon"><i class="fa fa-list"></i></span>
+                    <span class="text">Categorie</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ path('product_index') }}">
+                    <span class="icon"><i class="fa fa-shopping-cart"></i></span>
+                    <span class="text">product</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ path('product_stock_update') }}">
+                    <span class="icon"><i class="fa fa-dolly-flatbed"></i></span>
+                    <span class="text">Stock</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ path('tva_index') }}">
+                    <span class="icon"><i class="fas fa-piggy-bank"></i></span>
+                    <span class="text">Tva</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ path('answer') }}">
+                    <span class="icon"><i class="fas fa-question"></i></span>
+                    <span class="text">Réponse aux questions</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ path('admin_account_logout') }}">
+                    <span class="icon"><i class="fas fa-sign-in-alt"></i>></span>
+                    <span class="text">Déconnexion</span>
+                </a>
+            </li>
+
+        </ul>
+    </div>
+</div>
+<div class="main_container">
+
+    <div class="container">
+
+        <div class="content">
+
+            {{ include("/inc/breadcrumb.html.twig") }}
+
+        </div>
+
+    </div>
+
+</div>
+</div>
+
+{% block body %}{% endblock %}
+
+{% block javascripts %}
+
+{% endblock %}
+</body>

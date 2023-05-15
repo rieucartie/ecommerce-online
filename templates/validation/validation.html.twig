@@ -1,0 +1,137 @@
+{% extends "base.html.twig" %}
+
+{% set breadcrumbItems = [
+    { route: "commande",  label: "commande"}
+] %}
+
+{% block stylesheet %}
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+
+{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-4">
+
+                <p>
+                    Détails de la commande :
+
+                    <span>Total HT : {{ commande.totalHT|round(2, 'floor') }} €</span>
+
+                    <span>Total TVA : {{ commande.prixTVA|round(2, 'floor') }} €</span>
+
+                    <span> Total TTC : {{ commande.totalPrixTTC|round(2, 'floor') }} €</span>
+
+                    <a href="{{ path('facturation_pdf', { 'id': order.id }) }}" class="btn btn-primary">Imprimer la
+                        facture</a>
+
+                </p>
+
+            </div>
+
+            <div class="col-8">
+
+                <p class="alert alert-success">Simulation de paiement par carte bleu avec luhn</p>
+
+                <form action="{{ path('findecommande') }}" role="form" method="post">
+
+                    <div class="form-group">
+
+                        <label for="username">Nom </label>
+
+                        <div class="input-group">
+
+                            <div class="input-group-prepend">
+
+                                <span class="input-group-text"><i class="fa fa-user"></i></span>
+
+                            </div>
+
+                            <input type="text" class="form-control" name="username" placeholder="" required="">
+
+                        </div> <!-- input-group.// -->
+
+                    </div> <!-- form-group.// -->
+
+                    <div class="form-group">
+
+                        <h3><u>Inserez un numéro de carte correspondant à l'algorithme de Luhn</u></h3>
+
+                        <label for="cardNumber">Numéro de carte</label>
+
+                        <div class="input-group">
+
+                            <div class="input-group-prepend">
+
+                                <span class="input-group-text"><i class="fa fa-credit-card"></i></span>
+
+                            </div>
+
+                            {# dans l'attribut value de numeroCarte inserez un numero de carte correspondant à l'algorithme de Luhn #}
+
+                            <input type="password" class="form-control" name="numeroCarte" placeholder="" required="" value=""/>
+
+                        </div> <!-- input-group.// -->
+
+                    </div> <!-- form-group.// -->
+
+                    <div class="row">
+
+                        <div class="col-sm-8">
+
+                            <div class="form-group">
+
+                                <label><span class="hidden-xs">Expiration</span> </label>
+
+                                <div class="form-inline">
+
+                                    <select name="mois_cc">
+                                        {% for i in 1..12 %}
+                                            <option value="{{ i }} ">
+                                                {{ i }}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+
+                                    <span style="width:10%; text-align: center"> / </span>
+
+                                    <select name="annee_cc" id="annee_cc">
+                                        {% for i in 2021..2029 %}
+                                            <option value="{{ i }} ">
+                                                {{ i }}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+
+                                <label data-toggle="tooltip" title=""
+                                       data-original-title="3 digits code on back side of the card">CVV<i
+                                            class="fa fa-question-circle"></i></label>
+
+                                <input class="form-control" required="false" type="text">
+
+                            </div> <!-- form-group.// -->
+
+                        </div>
+
+                    </div> <!-- row.// -->
+
+                    <input type="submit" name="soumet"/>
+
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

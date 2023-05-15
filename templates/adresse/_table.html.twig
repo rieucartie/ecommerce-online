@@ -1,0 +1,34 @@
+<!-- template sybnb   -->
+<table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+        <th>Nom</th>
+        <th>Prenom</th>
+        <th>Telephone</th>
+        <th>Adresse</th>
+        <th>Cp</th>
+        <th>Pays</th>
+        <th>Ville</th>
+        <th>Complement</th>
+    </tr>
+
+    </thead>
+
+    <tbody>
+
+    <tr>
+        <td>{{ adresse.nom }}</td>
+        <td>{{ adresse.prenom }}</td>
+        <td>{{ adresse.Telephone }}</td>
+        <td>{{ adresse.adresse }}</td>
+        <td>{{ adresse.cp }}</td>
+        <td>{{ adresse.pays }}</td>
+        <td>{{ adresse.ville }}</td>
+        <td>{{ adresse.complement }}</td>
+    </tr>
+
+    </tbody>
+
+</table>
+
+<a class="btn btn-primary" href="{{ path('commande') }}">Commandez</a>

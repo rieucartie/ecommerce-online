@@ -1,0 +1,38 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Modifier le produit{% endblock %}
+
+{% block body %}
+
+    <div class="container3">
+
+        <h2>Modifier le produit</h2>
+
+        <hr>
+
+        <div class="form-group">
+
+            {{ include('admin/product/_form.html.twig', {'button_label': 'Modifier'}) }}
+
+        </div>
+
+        <div class="Global" id="Global">
+
+            <div id="gauche">
+                <a class="btn btn-outline-info" href="{{ path('product_index') }}">Retour à la liste</a>
+            </div>
+
+            <div id="droid">
+                {{ include('admin/product/_delete_form.html.twig') }}
+            </div>
+        </div>
+
+    </div>
+
+    {% block javascripts %}
+        <script src="{{ asset('build/deleteCustomStyle.js') }}"></script>
+        <script src="{{ asset('build/preloadImage.js') }}"></script>
+    {% endblock %}
+
+{% endblock %}
+

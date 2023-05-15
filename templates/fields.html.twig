@@ -1,0 +1,15 @@
+{% block file_row -%}
+
+    <div class="form-group">
+
+    <{{ element|default('div') }} class="custom-file">
+
+    {{- form_widget(form) -}}
+
+    {{- form_label(form) -}}
+
+    </{{ element|default('div') }}>
+
+    </div>
+
+{% endblock %}

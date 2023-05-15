@@ -1,0 +1,183 @@
+{% extends 'base.html.twig' %}
+{% set breadcrumbItems = [
+    { route: "infoproduct", routeParams: { id: produit.id }, label: "produit"}
+] %}
+{% block titre %}Information produit{% endblock %}
+
+ {% block stylesheets %}
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css">
+ {% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="card mb-3" style="max-width: 540px;">
+            <div class="row no-gutters">
+                <div class="col-md-4">
+                    <img id="myImg" src="{{ asset('uploads/'~ produit.fileName) }}" alt=""
+                         style="width:100%;max-width:300px">
+                </div>
+
+                <!-- The Modal -->
+                <div id="myModal" class="modal">
+                    <span class="close">&times;</span>
+
+                    {# on ajoute alt et src en js en bas du code #}
+                    <img class="modal-content" id="img01">
+
+                    <div id="caption"></div>
+                </div>
+
+                <div class="col-md-8">
+                    <div class="card-body">
+
+                        <h4 card-title>{{ produit.name }}</h4>
+
+                        <h5 class="card-text">
+
+                            {% for categorie in produit.categories %}
+
+                                {{ categorie.name }}
+
+                            {% endfor %}
+                        </h5>
+
+                        <p class="card-text">{{ produit.description }}</p>
+
+                        <h4 class="card-text">{{ produit.price|tva(produit.tva.multiplicate) }} € TTC (* tva
+                            incluse)</h4>
+
+                        <p class="card-text">{{ produit.content }}  </p>
+
+                        <div class="row">
+
+                            <div class="col-me">
+
+                                En Stock : {{ produit.stock }}
+
+                            </div>
+
+                            <div class="col-me">
+
+                                {% if( produit.stock <= 0) %}
+
+                                    <strong>Plus de stock ... </strong>
+
+                                {% else %}
+
+                                    <form action="{{ path('cartadd', { 'id' : produit.id }) }}" method="get">
+
+                                        Quantité :<select name="qte" style="width:80px;" class="custom-select">
+
+                                            {% for i in 1..produit.stock %}
+                                                <option value="{{ i }}">{{ i }}</option>
+                                            {% endfor %}
+
+                                        </select>
+
+                                        <div class="qte">
+                                            <button class="btn btn-primary">Ajouter au panier</button>
+                                        </div>
+                                    </form>
+
+                                {% endif %}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6 mt-4">
+
+                {% if app.user.username is defined and is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+
+                    <h1 class="text-center text-4xl text-gray-900 mb-1">Posez vos questions</h1>
+
+                    {{ form_start(form) }}
+
+                    {{ form_errors(form) }}
+
+                    <div class="form-group">
+                        {{ form_row(form.question, { 'label': 'Nom de la question' }) }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_row(form.body, { 'label': 'Texte de la question' }) }}
+                    </div>
+
+                    <button class="btn btn-primary">{{ button_label|default('enregistrer') }}</button>
+
+                    {{ form_end(form) }}
+
+                {% else %}
+
+                    <h1 class="text-center text-4xl text-gray-900 mb-1">Veuillez vous connecter pour poser des
+                        questions</h1>
+
+                {% endif %}
+
+            </div>
+
+            <div class="col-6">
+
+            {% if questionAsked|length > 0 %}
+
+                <div class="mt-6 max-w-3xl mx-auto mb-5">
+
+                    <h1 class="text-center text-4xl text-gray-900">Questions fréquentes</h1>
+
+                    <div class="mt-10 ">
+
+                        {% for questions in questionAsked %}
+
+                            <details class="border-2 rounded mb-2">
+
+                                <summary class="p-4 font-medium text-lg text-gray-900 cursor-pointer">
+                                    {{ questions.question }}
+                                </summary>
+
+                                <div class="p-4 bg-gray-100 italic ">
+
+                                    <p style="text-align:left ">
+
+                                        {% if app.user.username is defined %}
+
+                                        <strong>
+                                            {{ app.user.username }} a posé la question le
+                                        </strong>
+
+                                        {{ questions.created|date('d-m-Y') }}
+                                    </p>
+
+                                    {% for answers in questions.answers %}
+
+                                        <p style="text-align:right "><strong>
+                                                répondu le
+                                            </strong> {{ answers.created|date('d-m-Y') }}
+                                        </p>
+
+                                        {{ answers.body }}
+
+                                    {% endfor %}
+
+                                    {% endif %}
+                                </div>
+                            </details>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% else %}
+
+        {% endif %}
+
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+
+{% endblock %}

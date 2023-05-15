@@ -1,0 +1,55 @@
+{{ form_start(form) }}
+
+    {{ form_errors(form) }}
+
+        <div class="col-8 form-group">
+            {{ form_row(form.name , { 'label': 'nom' }) }}
+        </div>
+
+        <div class="col-8 form-group">
+            {{ form_row(form.price , { 'label': 'Prix' }) }}
+        </div>
+
+        <div class="col-8 form-group">
+            {{ form_row(form.description, { 'label': 'description' }) }}
+        </div>
+
+        <div class="col-8 form-group">
+            {{ form_row(form.content, { 'label': 'contenu' }) }}
+        </div>
+
+        <div class="col-8 form-group">
+
+            {{ form_row(form.imageFile, {
+                'label': 'choisissez une image',
+                attr: {
+                    'placeholder': 'Select an article image'
+                },
+            }) }}
+
+            <p id="fichier">fichier : {{ productName }}</p>
+
+        </div>
+
+        <div class="col-8 form-group">
+            {{ form_widget(form.promo, { 'label': 'promo','label_attr': {'class': 'label_input'} }) }}
+        </div>
+
+        <div class="col-8 form-group">
+            {{ form_row(form.tva, { 'label': 'tva' }) }}
+        </div>
+
+        <div class="col-8 form-group">
+            {{ form_row(form.stock , { "label": "stock"}) }}
+        </div>
+
+        <div class="form-control-file">
+            {{ form_row(form.categories, { 'label': 'categories' }) }}
+        </div>
+
+        <button class="btn btn-success">{{ button_label|default('enregistrer') }}</button>
+
+{{ form_end(form) }}
+
+{% block javascripts %}
+{% endblock %}

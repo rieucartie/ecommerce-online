@@ -1,0 +1,84 @@
+<div class="card">
+
+    <div class="zoom">
+
+        <img src="{{ vich_uploader_asset(product,'imageFile') }}" alt="{{ product.fileName }}" class="cardimg-top">
+
+    </div>
+
+    <div class="card-body">
+
+        <h5 class="card-title">{{ product.name }}</h5>
+
+        <div class="card-title text-primary" style="font-weight: bold;font-size:1.5em;">
+
+            {{ product.price |round(2, 'floor') }} €
+
+        </div>
+
+        {% if product.promo %}
+
+            <div class="text text-warning">! promo</div>
+
+        {% endif %}
+
+        <p style="max-block-size: 75px;" class="text-muted">
+
+            {{ product.description }}
+
+        </p>
+
+        <p class="text-muted">
+
+            {% if( product.stock <= 0) %}
+
+                <strong>Plus de stock ... </strong>
+
+            {% else %}
+
+                En Stock :{{ product.stock }}
+
+            {% endif %}
+        </p>
+
+    <div>
+
+        <br>
+
+            {% for c in product.categories %}
+
+                <div class="CardCategoriePos">
+
+                    <em class="text-muted text-primary">{{ c.name }}</em>
+
+                </div>
+
+            {% endfor %}
+
+            <div class="row">
+
+                <div class="ecartGauche">
+
+                    {% if( product.stock <= 0) %}
+
+                    {% else %}
+
+                        <a href="{{ path('cartadd',{'id':product.id}) }}" class="btn btn-success float-right">
+                            <i class="fas fa-shopping-cart mr-1"></i>
+                            Ajouter
+                        </a>
+
+                    {% endif %}
+
+                </div>
+
+                <div class="ecartDroite">
+
+                    <a href="{{ path('infoproduct',{'id':product.id}) }}" class="btn btn-success float-right">
+                        Plus d'infos
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

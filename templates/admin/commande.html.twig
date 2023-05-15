@@ -1,0 +1,111 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% set breadcrumbItems = [{ route: "commande", label: "commande"}] %}
+
+{% block title %}Commande{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+
+        {% if(pagination.data|length >0) %}
+
+        <div class="plusbas2">
+
+            <h2 class="mb-0">Historique des commandes</h2>
+
+            <hr>
+
+        </div>
+
+        <div class="row mb-4">
+                <table class="tables" id="datatable">
+                    <thead>
+                    <tr>
+                        <th class="text-center">Date de commande</th>
+                        <th class="text-center">Nom </th>
+                        <th class="text-center">Email </th>
+                        <th class="text-center">Statut</th>
+                        <th class="text-center">Prix total</th>
+                        <th class="text-center">Valider la commande</th>
+                        <th class="text-center">Annulation</th>
+                        <th width="100" class="text-center">Impression</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    {% for order in pagination.data %}
+                          <tr>
+                              <td class="text-center" >{{ order.datecommande|date("d/m/Y") }}</td>
+
+                              <td class="text-center">{{ order.user.username   }} </td>
+
+                              <td class="text-center">{{  order.user.email  }} <td class="text-center">
+
+                                   {% if order.state == "pending" %}
+                                        <span class="badge badge-primary">En cours de traitement</span>
+
+                                    {% elseif order.state == "treated" %}
+                                        <span class="badge badge-danger">Traiter</span>
+
+                                    {% elseif order.state == "canceled" %}
+                                        <span class="badge badge-danger">Annuler</span>
+
+                                    {% endif %}
+
+                              </td>
+
+                              <td>
+
+                                  {% set total = 0 %}
+
+                                  {% for line in lines  %}
+
+                                      {% if line.order.id is same as order.id %}
+
+                                          {% set total = total + ( (line.amount*line.quantity) + (line.amount*line.quantity*line.product.tva.multiplicate)) %}
+
+                                      {% endif %}
+
+                                      {% if loop.last   %}
+
+                                          {{ total }} {# Affiche le résultat uniquement à la dernière itération #}
+
+                                      {% endif %}
+
+                                  {% endfor %}
+
+                              </td>
+
+                              <td class="text-center"> <a href="{{ path("admin_validerDateCommande", { id: order.id, page : page }) }}" class="btn btn-outline-primary">Valider la commande</a></td>
+
+                              <td class="text-center"> <a href="{{ path("admin_ordercancel", { id: order.id, page : page }) }}" class="btn btn-outline-warning">Annuler la commande</a></td>
+
+                              <td width="100"  class="text-center"> <a href="{{ path("admin_VoirFacture", { id: order.user.id }) }}" class="btn btn-success">imprimer les commandes</a></td>
+
+                          </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+        </div>
+
+        <div class="plusbas2">
+
+            {{pagination.display()}}
+
+        </div>
+
+        {% else %}
+
+           <div class="plusbas2">
+
+               Pas d'enregistrement trouvé
+
+           </div>
+
+        {% endif %}
+
+    </div>
+
+{% endblock %}

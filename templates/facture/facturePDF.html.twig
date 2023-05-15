@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+        <title>Facture</title>
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+        <style type="text/css">
+            .text-right-pdf {
+                color: #000000;
+                font-weight: bold;
+                font-size: 14px;
+            }
+        </style>
+
+    </head>
+
+    <body>
+
+    {% set sumAddTvaToProduct = 0 %}
+
+       <h1 style="text-align: center">Factures</h1>
+
+       <strong>Date d'achat :</strong> {{ allOrder[0].datecommande|date('d-m-Y') }}
+
+       <ul id="coordonnes">
+
+           {% for line in allOrder %}
+
+           <li><strong> nom :</strong> {{ line.user.username }} </li>
+       </ul>
+
+           <div class="span3 pull-left">
+
+               <dl class="pull-left">
+
+                   <dt>Adresse de livraison : </dt>
+
+                   <dt>{{ adressedelivraison.adresse}} </dt>
+
+                   <dt>{{ adressedelivraison.cp }} - {{adressedelivraison.ville}} {{ adressedelivraison.pays}}</dt>
+
+               </dl>
+
+           </div>
+
+           <table class="table" id="entity">
+
+               <tr>
+
+                   <td width="180">DESIGNATION</td>
+
+                   <td width="55">QUANTITE</td>
+
+                   <td width="50">P.U - HT</td>
+
+                   <td width="55">MONTANT HT</td>
+               </tr>
+
+               {% for produit in line.lines %}
+
+                   {% set sumAddTvaToProduct = sumAddTvaToProduct +(produit.product.price * produit.quantity  * produit.product.tva.valeur)/100%}
+
+                   <tr>
+
+                       <td class="color">{{ produit.product.name }}</td>
+
+                       <td class="color">{{ produit.quantity }}</td>
+
+                       <td class="color">{{ produit.product.price }} €</td>
+
+                       <td class="color">{{ produit.product.price * produit.quantity }} €</td>
+
+                   </tr>
+
+               {% endfor %}
+
+           </table>
+
+       {% endfor %}
+
+       <table class="table" id="total">
+
+           <tr>
+               <td></td><td></td><td></td><td></td><td></td><td></td>
+               <td class="text-right-pdf" width="110">TOTAL HT : {{ allPrice.totalHT }} €</td>
+           </tr>
+
+               <tr>
+                   <td></td><td></td><td></td><td></td><td></td><td></td>
+                   <td class="text-right-pdf" width="110">TVA :{{  sumAddTvaToProduct }} €</td>
+               </tr>
+
+           <tr>
+
+               <td></td><td></td><td></td><td></td><td></td><td></td>
+               <td  class="text-right-pdf" width="110">TOTAL TTC : {{ allPrice.totalPrixTTC}} €</td>
+
+           </tr>
+
+       </table>
+
+    </body>
+
+</html>

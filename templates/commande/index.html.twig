@@ -1,0 +1,132 @@
+{% extends 'base.html.twig' %}
+
+{% set breadcrumbItems = [
+    { route: "validateadresses",  label: "validation"}
+] %}
+
+{% block title %}Commande{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+
+        <div class="row mb-4">
+            <h2>Valider mon panier</h2>
+        </div>
+
+        <div class="row">
+
+            <table class="table table-striped table-hover">
+
+                <thead>
+
+                <tr>
+
+                    <th>Références</th>
+
+                    <th>Quantité</th>
+
+                    <th>Prix unitaire</th>
+
+                    <th>Total HT</th>
+
+                </tr>
+
+                </thead>
+
+                <tbody>
+
+                {% set sum = 0 %}
+
+                {% set quantity = 0 %}
+
+                {% for data in panier %}
+
+                    <tr>
+
+                        <td>  {% set quantity = data.prix.name %} {{ data.prix.name }}</td>
+
+                        <td>
+                            {{ data.quantity }}
+                        </td>
+
+                        <td> {% set sum = sum + data.prix.price * data.quantity %} {{ data.prix.price|round(2, 'floor') }}
+                            €
+                        </td>
+
+                        <td>{{ data.prix.price|round(2, 'floor') * data.quantity }} €</td>
+
+                    </tr>
+
+                {% endfor %}
+
+                </tbody>
+
+            </table>
+
+            <div class="span3 pull-left">
+
+                <dl class="pull-left">
+
+                    <dt><h4>Adresse de livraison</h4></dt>
+
+                    <dt>{{ choixLivraison.nom }} {{ choixLivraison.prenom }}</dt>
+
+                    <dt>{{ choixLivraison.adresse }} </dt>
+
+                    <dt>{{ choixLivraison.cp }} {{ choixLivraison.ville }} - {{ choixLivraison.pays }} </dt>
+
+                </dl>
+            </div>
+            <div class="span3 pull-left">
+
+                <dl class="pull-left">
+
+                    <dt><h4>Adresse de facturation</h4></dt>
+
+                    <dt>{{ choixfacturation.nom }} {{ choixfacturation.prenom }}</dt>
+
+                    <dt>{{ choixfacturation.adresse }} </dt>
+
+                    <dt>{{ choixfacturation.cp }} {{ choixfacturation.ville }} - {{ choixfacturation.pays }} </dt>
+
+                </dl>
+            </div>
+
+            <dl class="dl-horizontal pull-right">
+
+                <dt>Total HT :</dt>
+
+                <dd>{{ sum|round(2, 'floor') }} €</dd>
+
+                <dt>Total TVA :</dt>
+
+                <dd>{{ prixTVA|round(2, 'floor') }} €</dd>
+
+                <dt>Total TTC :</dt>
+
+                <dd>{{ totalPrixTTC|round(2, 'floor') }} €</dd>
+
+                <dd>
+
+                    <form action="{{ path('commande') }}" method="POST">
+
+                        <input name="ladress" type="hidden" value="{{ ladress }}"/>
+
+                        <input name="prix" type="hidden" value="{{ sum }}"/>
+
+                        <button type="submit" class="btn btn-success pull-right">Payer</button>
+
+                    </form>
+
+                </dd>
+            </dl>
+
+            <div class="clearfix"></div>
+
+        </div>
+
+        <a href="{{ path('adresse', {'id': app.user.id}) }}" class="btn btn-primary">retour</a>
+
+    </div>
+{% endblock %}

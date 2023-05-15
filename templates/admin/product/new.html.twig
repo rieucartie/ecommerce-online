@@ -1,0 +1,26 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Nouveau produit {% endblock %}
+
+
+{% block body %}
+
+    <div class="container2">
+
+        <h1>Créer un nouveau produit</h1>
+
+        {{ include('admin/product/_form.html.twig') }}
+
+        <div class="Retour">
+
+            <a href="{{ path('product_index') }}" class="btn btn-success">Retour</a>
+
+        </div>
+
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('build/deleteCustomStyle.js') }}"></script>
+{% endblock %}
