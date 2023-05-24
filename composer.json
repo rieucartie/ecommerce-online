@@ -11,7 +11,7 @@
         "doctrine/doctrine-fixtures-bundle": "^3.4.0",
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.14",
-        "dompdf/dompdf": "^1.0",
+        "dompdf/dompdf": "^1.2.1",
         "knplabs/knp-paginator-bundle": "^5.4.2",
         "liip/imagine-bundle": "^2.5",
         "mbezhanov/faker-provider-collection": "^2.0.1",
